@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Voiture extends Model
 {
-    use HasFactory;
+    protected $table = 'voitures';
+    protected $fillable = ['id', 'client_id','owner','marque','matricule', ];
+
+    public function voitures()
+    {
+        return $this->belongsTo(Clients::class, 'client_id');
+    }
 }

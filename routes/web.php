@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\VoitureController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome.php', function () {
+Route::get('/welcome',function(){
     return view('welcome');
 });
-Route::get('/formulaire.php',function () {
-return view('formulaire');
-});
+Route::get('/proprietaire',[ClientController::class,'liste']);
+Route::post('/proprietaire',[ClientController::class,'store'])->name('addClient');
+Route::put('/proprietaire/update/{id}',[ClientController::class,'update'])->name('ajour');
+Route::delete('/proprietaire/destoy/{id}',[ClientController::class,'destroy'])->name('supp');
+
+/*les routes pour la table voiture*/
+Route::get('/wel',[VoitureController::class,'voire']
+);
+
