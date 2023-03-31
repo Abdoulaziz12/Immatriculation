@@ -32,29 +32,27 @@
                 </div>
           
                 <!-- Modal body -->
-               <form action="" method="POST" class="row g-3" style="padding:30px;">
+               <form action="{{route('voitures.store')}}" method="POST" class="row g-3" style="padding:30px;">
                 @csrf
             <div class="col-md-6">
-              <label for="title" class="form-label">Title</label>
+              <label for="title" class="form-label">Marque</label>
               <input type="text" class="form-control" name="title" id="title">
             </div>
             <div class="col-md-6">
-              <label for="Owners" class="form-label">Owners</label>
-              <select name="owner" id="">
-                @foreach ($voiture as $voitures )
-                  <option value="{{$voitures->clients->id}}">{{$voitures->clients->lastname}}</option>
-                @endforeach
-              </select>
+              <label for="owner">Clients:</label><br>
+                  <select name="owner" id="owner" class="form-control">
+                    <option value="volvo">Choisir le client</option>
+                    @foreach ($clients as $client )
+                     <option value="{{$client->id}}">{{$client->firstname." ".$client->lastname }}</option>
+                     @endforeach
+                  </select>
               
             </div>
-            <div class="col-6">
-              <label for="email" class="form-label">Marque</label>
+            <div class="col-12">
+              <label for="email" class="form-label">Modèle</label>
               <input type="text" class="form-control" id="marque" name="marque">
             </div>
-            <div class="col-6">
-              <label for="address" class="form-label">Matricule</label>
-              <input type="text" class="form-control" id="matricule" name="matricule">
-            </div>
+           
             
             
           
@@ -81,21 +79,36 @@
                   <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                   >
-                  <th class="px-4 py-3">#</th>
                     <th class="px-4 py-3">#</th>
-                    <th class="px-4 py-3">Title</th>
-                    <th class="px-4 py-3">Owner</th>
                     <th class="px-4 py-3">Marque</th>
-                    <th class="px-4 py-3">Matricule</th>
-                    <th class="px-4 py-3">Date</th>
+                    <th class="px-4 py-3">Modèle</th>
+                    <th class="px-4 py-3">Proprietaire</th>
+                    <th class="px-4 py-3">Plaque</th>
+                    <th class="px-4 py-3">Date d'ajout</th>
                     <th class="px-4 py-3">Actions</th>
-
-
                   </tr>
                 </thead>
                 <tbody
                   class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                 >
+                  @forelse ($voitures as $voiture)
+                  {{-- @dd($loop) --}}
+                    <tr>
+                      <td>{{  $loop->iteration }}</td>
+                      <td>{{ $voiture->title }}</td>
+                      <td>{{ $voiture->marque }}</td>
+                      <td>{{ $voiture->client->firstname. ' '.$voiture->client->lastname }}</td>
+                      <td>{{ $voiture->matricule }}</td>
+                      <td>{{ $voiture->created_at }}</td>
+                      <td></td>
+
+
+
+
+                    </tr>
+                  @empty
+                    
+                  @endforelse
                 </tbody>
               </table>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VoitureController;
 
@@ -16,7 +17,7 @@ use App\Http\Controllers\VoitureController;
 |
 */
 
-Route::get('/welcome',function(){
+Route::get('/',function(){
     return view('welcome');
 });
 Route::get('/proprietaire',[ClientController::class,'liste']);
@@ -25,6 +26,10 @@ Route::put('/proprietaire/update/{id}',[ClientController::class,'update'])->name
 Route::delete('/proprietaire/destoy/{id}',[ClientController::class,'destroy'])->name('supp');
 
 /*les routes pour la table voiture*/
-Route::get('/wel',[VoitureController::class,'voire']
-);
+Route::get('/voitures',[VoitureController::class,'index']);
 
+Route::post('/voitures',[VoitureController::class,'store'])->name('voitures.store');
+
+Route::get('/login',[MainController::class,'login'])->name('auth.login');
+Route::get('/register',[MainController::class,'register'])->name('auth.register');
+Route::post('/save',[MainController::class,'save'])->name('auth.save');

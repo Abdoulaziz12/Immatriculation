@@ -14,7 +14,7 @@ class ClientController extends Controller
     }
 
     public function store(request $request){
-        // dd('ici');
+        // 
         $clients = new Clients();
         $clients->lastname = $request->input('lastname');
         $clients->firstname = $request->input('firstname');
@@ -22,6 +22,7 @@ class ClientController extends Controller
         $clients->adress = $request->input('adress');
         $clients->work = $request->work;
         $clients->save();
+
         return back()->with('success','Proprietaire ajouter avec success');
     }
     public function edit($id){
